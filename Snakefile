@@ -1,4 +1,4 @@
-rule introduction:
+rule equired_sample_size_vs_prior:
     input:
         notebook = "notebooks/required-sample-size-vs-prior.ipynb"
     output:
