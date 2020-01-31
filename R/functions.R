@@ -59,3 +59,12 @@ get_n_quantile <- function(null, prior, prob, mrv = null, pwr = .8, alpha = .025
     )
     return(ceiling(n))
 }
+
+get_n <- function(null, palt, pwr = .8, alpha = .025, upper_n = 1e4) {
+    f   <- function(n) power(palt, n, qnorm(1 - alpha)) - pwr
+    n   <- tryCatch(
+        uniroot(f, lower = 1, upper = upper_n)$root,
+        error = function(e) NA_real_
+    )
+    return(ceiling(n))
+}
