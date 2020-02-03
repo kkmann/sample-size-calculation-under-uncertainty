@@ -1,8 +1,8 @@
 options(tidyverse.quiet = TRUE)
 library(tidyverse)
 
-source("priors.R")
-source("functions.R")
+source("R/priors.R")
+source("R/functions.R")
 
 prior            <- Normal(0.3, 0.2, -0.2, 0.7)
 # one sided maximal type one error rate
@@ -138,6 +138,7 @@ cowplot::plot_grid(plt_prior,
     nrow = 1
 )
 
-ggsave('../latex/figures/example.pdf', width = 9, height = 5)
+dir.create("latex/figures", showWarnings = FALSE, recursive = TRUE)
+ggsave("latex/figures/example.pdf", width = 9, height = 5)
 
 

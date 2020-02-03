@@ -1,8 +1,8 @@
 options(tidyverse.quiet = TRUE)
 library(tidyverse)
 
-source("priors.R")
-source("functions.R")
+source("R/priors.R")
+source("R/functions.R")
 
 # maximal sample size cut-off
 nmax             <-  1000
@@ -63,6 +63,7 @@ tbl_grid %>%
         )
 
 # save plot as pdf
-ggsave('../latex/figures/power-constraint-comparison.pdf', width = 8, height = 8)
+dir.create("latex/figures", showWarnings = FALSE, recursive = TRUE)
+ggsave("latex/figures/power-constraint-comparison.pdf", width = 8, height = 8)
 
 

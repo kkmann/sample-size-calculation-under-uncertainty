@@ -1,8 +1,8 @@
 options(tidyverse.quiet = TRUE)
 library(tidyverse)
 
-source("priors.R")
-source("functions.R")
+source("R/priors.R")
+source("R/functions.R")
 
 # one sided maximal type one error rate
 alpha            <- 0.025
@@ -54,6 +54,7 @@ ggplot(aes(mcid, value)) +
     )
 
 # save plot as pdf
-ggsave('../latex/figures/pos-components.pdf', width = 8, height = 8)
+dir.create("latex/figures", showWarnings = FALSE, recursive = TRUE)
+ggsave("latex/figures/pos-components.pdf", width = 8, height = 8)
 
 
