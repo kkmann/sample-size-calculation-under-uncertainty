@@ -28,6 +28,14 @@ pdf <- function(dist, Delta) ifelse(
     dnorm(Delta, dist$mu, dist$tau) / dist$normalizing_constant
 )
 
+cdf <- function(dist, Delta) {
+    epsilon <- (Delta - dist$mu) / dist$tau
+    alpha   <- (dist$lower - Delta) / dist$tau
+    beta    <- (dist$upper - Delta) / dist$tau
+    z       <- pnorm(beta) - pnorm(alpha)
+    return( (pnorm(epsilon) - pnorm(alpha) ) / z )
+}
+
 quantile <- function(dist, prob) {
     res <- qnorm(pnorm(dist$lower, dist$mu, dist$tau) +
         prob*(pnorm(dist$upper, dist$mu, dist$tau) - pnorm(dist$lower, dist$mu, dist$tau)), dist$mu, dist$tau)
