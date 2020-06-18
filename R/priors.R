@@ -41,3 +41,17 @@ quantile <- function(dist, prob) {
         prob*(pnorm(dist$upper, dist$mu, dist$tau) - pnorm(dist$lower, dist$mu, dist$tau)), dist$mu, dist$tau)
     res
 }
+
+get_sample <- function(dist, n) {
+    # sample from prior... inefficiently
+    rtheta <- numeric(n)
+    i <- 1
+    while (i < n) {
+        sample <- rnorm(1, mean = dist$mu, sd = dist$tau)
+        if (between(sample, dist$lower, dist$upper)) {
+            rtheta[i] <- sample
+            i <- i + 1
+        }
+    }
+    return(rtheta)
+}

@@ -41,6 +41,5 @@ vignettes/*.pdf
 
 *.DS_Store
 .snakemake
-.ipynb_checkpoints
-notebooks/.ipynb_checkpoints/
 *.pdf
+latex/figures

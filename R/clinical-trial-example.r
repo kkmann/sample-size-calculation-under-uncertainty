@@ -4,7 +4,7 @@ library(tidyverse)
 source("R/priors.R")
 source("R/functions.R")
 
-prior            <- Normal(0.3, 0.2, -0.2, 0.7)
+prior            <- Normal(0.2, 0.2, -0.3, 0.7)
 # one sided maximal type one error rate
 alpha            <- 0.025
 # minimal power/expected power/probability of success is 1 - beta
@@ -13,37 +13,39 @@ beta             <- 0.2
 # H0: theta <= theta_null
 theta_null       <- 0.0
 # minimal clinically important difference (MCID)
-theta_mcid       <- 0.1
+theta_mcid       <- 0.05
 
 plt_prior <- tibble(
-    theta = seq(-0.5, 1.0, .01),
-    `unconditional prior` = pdf(prior, theta) %>%
-        {ifelse(theta == .7 | theta == prior$lower, NA_real_, .)},
-    `conditional prior`   = pdf(condition(prior, lo = theta_mcid), theta) %>%
-        {ifelse(theta == .7 | (theta == theta[which.min(abs(theta_mcid - theta))]), NA_real_, .)}
-) %>%
-pivot_longer(-theta, names_to = "type", values_to = "PDF") %>%
-ggplot() +
-aes(theta, PDF, linetype = type) +
-geom_line() +
-scale_linetype_discrete("") +
-scale_x_continuous(expression(theta)) +
-theme_bw() +
-theme(
-    legend.position = "top"
-)
+        theta = seq(-0.5, 1.0, .01),
+        `unconditional prior` = pdf(prior, theta) %>%
+            {ifelse(theta == .7 | theta == prior$lower, NA_real_, .)},
+        `conditional prior`   = pdf(condition(prior, lo = theta_mcid), theta) %>%
+            {ifelse(theta == .7 | (theta == theta[which.min(abs(theta_mcid - theta))]), NA_real_, .)}
+    ) %>%
+    pivot_longer(-theta, names_to = "type", values_to = "PDF") %>%
+    ggplot() +
+    aes(theta, PDF, linetype = type) +
+    geom_line() +
+    scale_linetype_discrete("") +
+    scale_x_continuous(expression(theta)) +
+    theme_bw() +
+    theme(
+        legend.position = "top"
+    )
 
 plt_prior
 
 tbl_samplesizes <- tibble(
-    "MCID" = get_n(theta_null, theta_mcid),
-    "EP"   = get_n_ep(theta_null, prior, mrv = theta_mcid, pwr = 1 - beta, alpha = alpha),
-    "quantile, 0.9"   = get_n_quantile(theta_null, prior, .9, mrv = theta_mcid, pwr = 1 - beta, alpha = alpha),
-    "quantile, 0.5"   = get_n_quantile(theta_null, prior, .5, mrv = theta_mcid, pwr = 1 - beta, alpha = alpha)
-) %>%
-pivot_longer(everything(), names_to = "type", values_to = "n")
+        "MCID" = get_n(theta_null, theta_mcid),
+        "EP"   = get_n_ep(theta_null, prior, mrv = theta_mcid, pwr = 1 - beta, alpha = alpha),
+        "quantile, 0.9"   = get_n_quantile(theta_null, prior, .9, mrv = theta_mcid, pwr = 1 - beta, alpha = alpha),
+        "quantile, 0.5"   = get_n_quantile(theta_null, prior, .5, mrv = theta_mcid, pwr = 1 - beta, alpha = alpha)
+    ) %>%
+    pivot_longer(everything(), names_to = "type", values_to = "n")
 
 tbl_samplesizes
+
+1 - cdf(prior, theta_mcid)
 
 prior
 quantile(condition(prior, lo = theta_mcid), 1 - 0.5)
@@ -68,7 +70,7 @@ plt_powr_curves <- tbl %>%
     geom_line() +
     scale_color_discrete("") +
     scale_x_continuous(expression(theta), breaks = seq(-1, 1, .1)) +
-    scale_y_continuous(breaks = seq(0, 1, .1), expand = c(0, 0)) +
+    scale_y_continuous("probability to reject", breaks = seq(0, 1, .1), expand = c(0, 0)) +
     theme_bw() +
     theme(
         panel.grid.minor = element_blank(),
@@ -113,7 +115,7 @@ plt_power_cdf <- full_join(
     ggplot(aes(power, CDF, color = name)) +
     geom_line() +
     scale_color_discrete("") +
-    scale_x_continuous(breaks = seq(0, 1, .1)) +
+    scale_x_continuous("random power", breaks = seq(0, 1, .1)) +
     scale_y_continuous(breaks = seq(0, 1, .1)) +
     coord_cartesian(expand = FALSE) +
     theme_bw() +
@@ -122,7 +124,10 @@ plt_power_cdf <- full_join(
         legend.position = "top"
     )
 
+plt_power_cdf
+
 legend <- cowplot::get_legend(plt_powr_curves)
+
 cowplot::plot_grid(plt_prior,
     cowplot::plot_grid(
         legend,
@@ -139,6 +144,6 @@ cowplot::plot_grid(plt_prior,
 )
 
 dir.create("latex/figures", showWarnings = FALSE, recursive = TRUE)
-ggsave("latex/figures/example.pdf", width = 9, height = 5)
+ggsave("latex/figures/clinical-trials-example-start.pdf", width = 10, height = 4)
 
 

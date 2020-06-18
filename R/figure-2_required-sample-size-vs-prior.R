@@ -7,10 +7,10 @@ source("R/functions.R")
 # maximal sample size cut-off
 nmax             <-  1000
 # lowest and highest plausible values of the location parameter theta
-prior_lo         <- -1.0
-prior_hi         <-  1.0
+prior_lo         <- -0.3
+prior_hi         <-  0.7
 # range of prior means for location parameter
-prior_mean_range <- seq(0, .5, by = .01)
+prior_mean_range <- seq(prior_lo, prior_hi, by = .01)
 # range of prior standard deviations for location parameter
 prior_sd_range   <- seq(.01, 1, by = .01)
 # one sided maximal type one error rate
@@ -21,7 +21,7 @@ beta             <- 0.2
 # H0: theta <= theta_null
 theta_null       <- 0.0
 # minimal clinically important difference (MCID)
-theta_mcid       <- theta_null
+theta_mcid       <- 0.1
 
 tbl_grid <- expand_grid(
         mu  = prior_mean_range ,
@@ -40,8 +40,6 @@ tbl_grid <- expand_grid(
         names_to  = 'criterion'
     )
 
-options(repr.plot.width = 12, repr.plot.height = 12)
-
 tbl_grid %>%
     filter(
         `required sample size` <= nmax, # make sure maximal sample size is respected
@@ -51,10 +49,16 @@ tbl_grid %>%
         aes(mu, tau, fill = `required sample size`, z = `required sample size`) +
         geom_raster() + # geom_raster leads to some pdf viewers interpolating, do not want that!
         scale_fill_gradient(limits = c(0, 1000), low = '#FFFFFF', high = '#000000') +
+        guides(
+            fill = guide_colorbar("required sample size",
+                                  barwidth  = grid::unit(15, "lines"),
+                                  barheight = grid::unit(.5, "lines")
+                )
+        ) +
         coord_cartesian(expand = FALSE) +
         xlab('prior mean') +
         ylab('prior standard deviation') +
-        facet_wrap(~criterion) +
+        facet_wrap(~criterion, nrow = 1) +
         theme_bw() +
         theme(
             panel.grid      = element_blank(),
@@ -64,6 +68,4 @@ tbl_grid %>%
 
 # save plot as pdf
 dir.create("latex/figures", showWarnings = FALSE, recursive = TRUE)
-ggsave("latex/figures/power-constraint-comparison.pdf", width = 8, height = 8)
-
-
+ggsave("latex/figures/power-constraint-comparison.pdf", width = 8, height = 3.15)

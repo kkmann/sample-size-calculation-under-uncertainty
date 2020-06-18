@@ -33,7 +33,7 @@ CEP <- function(prior, zn1, n1, n, c, mrv = 0) {
 
 
 get_n_ep <- function(null, prior, mrv = null, pwr = .8, alpha = .025, upper_n = 1e4) {
-    f   <- function(n) EP(prior, n, qnorm(1 - alpha)) - pwr
+    f   <- function(n) EP(prior, n, qnorm(1 - alpha), mrv) - pwr
     n   <- tryCatch(
         uniroot(f, lower = 1, upper = upper_n)$root,
         error = function(e) NA_real_
@@ -42,7 +42,7 @@ get_n_ep <- function(null, prior, mrv = null, pwr = .8, alpha = .025, upper_n = 
 }
 
 get_n_pos <- function(null, prior, mrv = null, pwr = .8, alpha = .025, upper_n = 1e4) {
-    f   <- function(n) PoS(prior, n, qnorm(1 - alpha)) - pwr
+    f   <- function(n) PoS(prior, n, qnorm(1 - alpha), mrv) - pwr
     n   <- tryCatch(
         uniroot(f, lower = 1, upper = upper_n)$root,
         error = function(e) NA_real_
