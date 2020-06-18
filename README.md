@@ -4,7 +4,7 @@
 # Sample size calculation under uncertainty
 
 This repository contains the R code required to produce the figures in
-*`A review of Bayesian perspectives on sample size calculation for confirmatory trial'*
+*`A review of Bayesian perspectives on sample size calculation for confirmatory trials'*
 (???).
 A long-term backup of the repository at the time of publication of the manuscript
 is available at https://doi.org/10.5281/zenodo.3899944.
