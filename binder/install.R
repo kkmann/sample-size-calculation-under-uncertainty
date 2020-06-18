@@ -1,3 +1,5 @@
 install.packages("tidyverse")
 install.packages("cowplot")
 install.packages("scatterpie")
+install.packages("tinytex")
+tinytex::install_tinytex()
