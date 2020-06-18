@@ -4,7 +4,7 @@
 # A review of Bayesian perspectives on sample size derivation for confirmatory trials
 
 This repository contains the R code required to produce the figures in
-*`A review of Bayesian perspectives on sample size calculation for confirmatory trial'*
+*`A review of Bayesian perspectives on sample size calculation for confirmatory trials'*
 (???).
 
 
