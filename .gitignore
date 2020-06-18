@@ -42,4 +42,5 @@ vignettes/*.pdf
 *.DS_Store
 .snakemake
 *.pdf
+*.html
 latex/figures
