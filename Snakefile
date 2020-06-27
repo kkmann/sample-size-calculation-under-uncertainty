@@ -25,5 +25,8 @@ rule figures:
     shell:
         """
         set -ex
-        jupyter nbconvert --to notebook --execute notebooks/figures-for-manuscript.ipynb
+        jupyter nbconvert \
+            --to notebook \
+            --execute --ExecutePreprocessor.timeout=600 \
+            notebooks/figures-for-manuscript.ipynb
         """

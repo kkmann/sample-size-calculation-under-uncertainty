@@ -13,5 +13,10 @@ tinytex::tlmgr_install(c(
     "scalerel",
     "ulem",
     "logreq",
-    "biber"
+    "biber",
+    "biblatex",
+    "biblatex-apa",
+    "fp",
+    "ms",
+    "pgf"
 ))
