@@ -1,0 +1,193 @@
+\begin{tikzpicture}[->,>=stealth']
+\footnotesize
+    \node[state,
+        text width=4.5cm,
+        yshift=0cm,
+        anchor=center,
+        align=left,
+        inner sep=.75em
+    ] (power) {
+        \begin{tabular}{rl}
+            \multicolumn{2}{l}{\textbf{Probability to reject $\mathcal{H}_0$}} \\[1em]
+            \textit{Sym.}: & 
+                $\Pr_\theta[\,Z_n > \criticalvalue\,]$ \\[.33em]
+            \textit{Def.}: & 
+                $\Phi\big(\theta_n - \criticalvalue\big)$ \\[.33em]
+            \textit{Int.}: & 
+                \parbox[t]{3.25cm}{
+                real number; 
+                probability to reject the null hypothesis \emph{given a~fixed~value~of~$\theta$}
+                }
+        \end{tabular}
+    };
+    
+    \node[state,
+        text width=8.25cm, 	% max text width
+        yshift=9cm, 		% move 2cm in y
+        right of=power, 	% Position is to the right of QUERY
+        node distance=7.5cm, 	% distance to QUERY
+        anchor=center,
+        align=left,
+        inner sep=.75em
+    ] (rprreject) {
+        \begin{tabular}{rl}
+            \multicolumn{2}{l}{\textbf{Random probability to reject $\mathcal{H}_0$}} \\[1em]
+            \textit{Sym.}: & $\rpr(n)$ \\[.33em]
+            \textit{Def.}: & $\Pr_{\Theta}[\,Z_n > \criticalvalue\,] = \Phi\Big(\sqrt{n}/ \sigma\,(\Theta - \theta_0) - \criticalvalue\Big)$ \\[.33em]
+            \textit{Int.}: & \parbox[t]{6.5cm}{random variable; realisations correspond to the probability to reject the null hypothesis for $\Theta=\theta$}
+        \end{tabular}
+    };
+    
+    \node[state,
+        text width=8.25cm, 
+        yshift=5cm, 		
+        right of=power, 
+        node distance=7.5cm, 
+        anchor=center,
+        align=left,
+        inner sep=.75em
+    ] (rpower) {
+        \begin{tabular}{rl}
+            \multicolumn{2}{l}{\textbf{Random power}} \\[1em]
+            \textit{Sym.}: & $\rpower{n}$ \\[.33em]
+            \textit{Def.}: & $\rpr(n) \mid \Theta \geq \mcid$ \\[.33em]
+            \textit{Int.}: & 
+                \parbox[t]{6.5cm}{random variable; realisations correspond to the probability to reject the null hypothesis for $\Theta=\theta$ \emph{given a relevant effect}}
+        \end{tabular}
+    };
+    
+    \node[state,
+        text width=8.25cm, 	% max text width
+        yshift=0.5cm, 		% move 2cm in y
+        right of=power, 	% Position is to the right of QUERY
+        node distance=7.5cm, 	% distance to QUERY
+        anchor=center,
+        align=left,
+        inner sep=.75em
+    ] (epower) {
+        \begin{tabular}{rl}
+            \multicolumn{2}{l}{\textbf{Expected power}} \\[1em]
+            \textit{Sym.}: & $\EP(n)$ \\[.33em]
+            \textit{Def.}: & \parbox[t]{3cm}{
+                \vspace*{-1.8em}
+                \begin{align}
+                & \Pr[\,Z_n > z_{1-\alpha}\mid \Theta \geq\mcid\,]= \E[\,\rpower{n}\,]\nonumber\\ 
+                &=\int_{\mcid}^\infty \Pr_\theta[\,Z_n > \criticalvalue\,]\ \varphi(\theta\,|\,\Theta\geq \mcid)\, \operatorname{d} \theta \nonumber
+            \end{align}} \\[.33em]
+            \textit{Int.}: & 
+                \parbox[t]{6.5cm}{real number; average probability to reject the null weighted with prior density \emph{conditional on $\Theta\geq\mcid$}}
+        \end{tabular}
+    };
+    
+    \node[state,
+        text width=8.25cm, 	% max text width
+        yshift=-4.5cm, 		% move 2cm in y
+        right of=power, 	% Position is to the right of QUERY
+        node distance=7.5cm, 	% distance to QUERY
+        anchor=center,
+        align=left,
+        inner sep=.75em
+    ] (pos) {
+        \begin{tabular}{rl}
+            \multicolumn{2}{l}{\textbf{Probability of success}} \\[1em]
+            \textit{Sym.}: & $\PoS(n)$ \\[.33em]
+            \textit{Def.}: & \parbox[t]{3cm}{
+                \vspace*{-1.75em}
+                \begin{align}
+                    &\Pr[\,Z_n > z_{1-\alpha}, \Theta \geq\mcid\,] \nonumber \\ 
+                    &= \int_{\mcid}^\infty \Pr_\theta[\,Z_n > \criticalvalue\,]\ \varphi(\theta)\, \operatorname{d}\theta \nonumber
+                \end{align}
+            } \\[.33em]
+            \textit{Int.}: & 
+                \parbox[t]{6.5cm}{real number; joint probability to reject the null and have a relevant effect; average probability to reject on $\Theta\geq\mcid$ weighted with \emph{unconditional} prior density}
+        \end{tabular}
+    };
+    
+    \node[state,
+        text width=8.25cm, 	% max text width
+        yshift=-9.5cm, 		% move 2cm in y
+        right of=power, 	% Position is to the right of QUERY
+        node distance=7.5cm, 	% distance to QUERY
+        anchor=center,
+        align=left,
+        inner sep=.75em
+    ] (posprime) {
+        \begin{tabular}{rl}
+            \multicolumn{2}{l}{\textbf{Marginal probability to reject $\mathcal{H}_0$}} \\[1em]
+            \textit{Sym.}: & $\PoS'(n)$ \\[.33em]
+            \textit{Def.}: & \parbox[t]{3cm}{
+                \vspace*{-1.75em}
+                \begin{align}
+                    &\Pr_{\varphi(\cdot)}[\,Z_n > z_{1-\alpha}\,] = \E[\,\rpr(n)\,] \nonumber \\
+                    &=  \int_{-\infty}^\infty \Pr_\theta[\,Z_n > \criticalvalue\,]\ \varphi(\theta)\ \operatorname{d}\theta \nonumber
+                \end{align}
+            } \\[.33em]
+            \textit{Int.}: & 
+                \parbox[t]{6.5cm}{real number; marginal probability to reject the null irrespective of underlying effect}
+        \end{tabular}
+    };
+  
+    \path 
+    (power) edge[bend left=20] 
+        node[anchor=south,above,xshift=-1.25cm]{%
+            \parbox{2cm}{\tiny
+                replace fixed parameter $\theta$ with random variable ${\Theta\sim\varphi(\cdot)}$}
+            }
+        (rprreject.west)
+    (rprreject) edge
+        node[anchor=west,xshift=.25em]{%
+            \parbox{2.5cm}{\tiny
+                condition on ${\Theta\geq\mcid}$}
+            }
+        (rpower)
+    ([xshift=0.5cm]power.north) edge[bend left=12.5]
+        node[anchor=south,above,yshift=0.15cm,xshift=-.5em]{%
+            \parbox{2.5cm}{\tiny
+                integrate with respect to prior conditional on relevant effect, ${\varphi(\cdot\mid\Theta\geq\mcid)}$}
+            }
+        (epower)
+    (power) edge[bend right=30]
+        node[anchor=east,above,xshift=2em, yshift=.33cm]{%
+            \parbox{1.66cm}{\tiny
+                integrate over $\theta \geq \mcid$ with unconditional prior $\varphi(\cdot)$}
+            }
+        (pos.west)
+    (power) edge[bend right=20] 
+        node[xshift=-1.15cm]{%
+            \parbox{1.55cm}{\tiny
+                integrate over entire parameter range with unconditional prior $\varphi(\cdot)$}
+            }
+        (posprime.west)
+    (rpower) edge
+        node[anchor=west,xshift=.25em]{%
+            \parbox{2.5cm}{\tiny
+                form expected value}
+            }
+        (epower)
+    (epower) edge
+        node[anchor=west,xshift=.5em]{%
+            \parbox{3cm}{\tiny
+                $\cdot \Pr_{}[\,Z_n > \criticalvalue\,]$}
+            }
+        (pos)
+    (pos) edge
+        node[anchor=west,xshift=.5em]{%
+            \parbox{3.5cm}{\tiny
+                add expected type one error rate and probability of rejection under irrelevant values}
+            }
+        (posprime)
+    (rprreject.east) edge[bend left=10]
+        node[anchor=east,below,xshift=1.5em,yshift=-2.25cm]{%
+            \parbox{1cm}{\tiny
+                form expected value}
+            }
+        (epower.east)
+    (rprreject.east) edge[bend left=15]
+        node[anchor=east,below,xshift=-1.5em,yshift=-1cm]{%
+            \parbox{1cm}{\tiny
+                form expected value}
+            }
+        (posprime.east);
+
+\end{tikzpicture}
+

@@ -3,3 +3,15 @@ install.packages("cowplot")
 install.packages("scatterpie")
 install.packages("tinytex")
 tinytex::install_tinytex()
+tinytex::tlmgr_install(c(
+    "fancyhdr",
+    "multirow",
+    "caption",
+    "units",
+    "microtype",
+    "lipsum",
+    "scalerel",
+    "ulem",
+    "logreq",
+    "biber"
+))

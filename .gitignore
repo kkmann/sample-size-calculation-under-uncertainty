@@ -49,3 +49,5 @@ latex/figures
 .jupyter
 .local
 *.ipynb_checkpoints
+
+*.nbconvert.ipynb

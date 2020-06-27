@@ -1,19 +1,29 @@
-rule figures:
+rule manuscript:
+    input:
+        "latex/figures/fig2-required-sample-size-comparison.pdf",
+        "latex/figures/fig3-pos-prime-composition.pdf",
+        "latex/figures/fig4-power-distribution-ep-approach.pdf",
+        "latex/figures/fig5-power-distribution-quantile-approach.pdf",
+        "latex/figures/fig6-clinical-trial-example.pdf",
+        "latex/figures/fig7-matched-reward.pdf"
     output:
-        "latex/figures/power-constraint-comparison.pdf",
-        "latex/figures/pos-components.pdf",
-        "latex/figures/quantile-vs-ep.pdf",
-        "latex/figures/power-distribution-examples.pdf",
-        "latex/figures/power-distribution-quantile-approach.pdf",
-        "latex/figures/matched-reward.pdf"
+        "latex/main.pdf"
     shell:
         """
         set -ex
-        mkdir -p latex/figures
+        Rscript -e "setwd('latex'); tinytex::latexmk('main.tex', bib_engine = 'biber')"
+        """
 
-        Rscript R/figure-2_required-sample-size-vs-prior.R
-        Rscript R/figure-3_pos-composition.R
-        Rscript R/figure-4_distribution-of-power-ep-approach.R
-        Rscript R/figure-5-and-6_distribution-of-power-quantile-approach.R
-        Rscript R/figure-7_utility-matching.R
+rule figures:
+    output:
+        "latex/figures/fig2-required-sample-size-comparison.pdf",
+        "latex/figures/fig3-pos-prime-composition.pdf",
+        "latex/figures/fig4-power-distribution-ep-approach.pdf",
+        "latex/figures/fig5-power-distribution-quantile-approach.pdf",
+        "latex/figures/fig6-clinical-trial-example.pdf",
+        "latex/figures/fig7-matched-reward.pdf"
+    shell:
+        """
+        set -ex
+        jupyter nbconvert --to notebook --execute notebooks/figures-for-manuscript.ipynb
         """
