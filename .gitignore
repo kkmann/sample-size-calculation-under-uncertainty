@@ -44,3 +44,8 @@ vignettes/*.pdf
 *.pdf
 *.html
 latex/figures
+
+.binder
+.jupyter
+.local
+*.ipynb_checkpoints
