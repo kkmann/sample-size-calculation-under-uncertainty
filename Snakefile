@@ -11,7 +11,7 @@ rule manuscript:
     shell:
         """
         set -ex
-        Rscript -e "setwd('latex'); tinytex::latexmk('main.tex', bib_engine = 'biber')"
+        Rscript -e "setwd('latex'); tinytex::latexmk('main.tex', clean = FALSE)"
         """
 
 rule figures:
