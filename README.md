@@ -34,7 +34,7 @@ To execute the workflow, simply open a shell (locally or via the mybinder.org li
 and run the command 
 
 ```
-snakemake --cores 1  manuscript
+snakemake -F --cores 1  manuscript
 ```
 
 in the project root directory (requires [snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html), pre-installed in the binder container). 
