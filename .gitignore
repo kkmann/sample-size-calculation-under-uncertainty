@@ -43,7 +43,6 @@ vignettes/*.pdf
 .snakemake
 *.pdf
 *.html
-latex/figures
 
 .binder
 .jupyter

@@ -29,4 +29,5 @@ rule figures:
             --to notebook \
             --execute --ExecutePreprocessor.timeout=600 \
             notebooks/figures-for-manuscript.ipynb
+        mv notebooks/fig*.pdf latex/figures
         """
