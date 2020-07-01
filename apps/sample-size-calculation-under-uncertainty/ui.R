@@ -41,7 +41,7 @@ shinyUI(fluidPage(
                         "\\(\\alpha\\):",
                         min = 0.01,
                         max = 0.2,
-                        step = 0.01,
+                        step = 0.005,
                         ticks = FALSE,
                         value = .025),
             sliderInput("beta",
