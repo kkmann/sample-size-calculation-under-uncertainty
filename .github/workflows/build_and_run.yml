@@ -21,7 +21,7 @@ jobs:
       uses: machine-learning-apps/repo2docker-action@0.2 
     - name: start container
       run: |
-        docker run -d --name repo-container kkmann/unplanned-sample-size-adaptation
+        docker run -d --name repo-container sample-size-calculation-under-uncertainty 
     - name: execute jupyter notebook
       run: |
         docker exec -it repo-container \
