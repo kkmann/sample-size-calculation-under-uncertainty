@@ -18,7 +18,7 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
     - name: start container
       run: |
-        docker run -d --name repo-container sample-size-calculation-under-uncertainty 
+        docker run -d --name repo-container ${{ secrets.DOCKER_USERNAME }}/sample-size-calculation-under-uncertainty 
     - name: execute jupyter notebook
       run: |
         docker exec repo-container \
