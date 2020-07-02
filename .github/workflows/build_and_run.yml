@@ -14,11 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: repo2docker Action  
+      uses: machine-learning-apps/repo2docker-action@0.2 
       with: 
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        MYBINDERORG_TAG: ${{ github.event.ref }}      
-      uses: machine-learning-apps/repo2docker-action@0.2 
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
     - name: start container
       run: |
         docker run -d --name repo-container sample-size-calculation-under-uncertainty 
