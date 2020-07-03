@@ -4,9 +4,6 @@ on:
   push:
     branches: 'master'
     paths: '.binder/**'
-  pull_request:
-    branches: 'master'
-    paths: '.binder/**'
     
 jobs:
   repo2docker:
