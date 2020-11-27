@@ -24,4 +24,4 @@ jobs:
     - name: execute jupyter notebook
       run: |
         docker exec repo-container \
-          snakemake -F --cores 1  manuscript
+          jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=600 sample-size-calculation-under-uncertainty.ipynb
