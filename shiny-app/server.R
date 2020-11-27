@@ -1,7 +1,7 @@
 suppressPackageStartupMessages(library(tidyverse))
 
-source("../../R/priors.R")
-source("../../R/functions.R")
+source("../R/priors.R")
+source("../R/functions.R")
 library(shiny)
 
 
