@@ -1,6 +1,5 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3899943.svg)](https://doi.org/10.5281/zenodo.3899943)
 ![build and run](https://github.com/kkmann/sample-size-calculation-under-uncertainty/workflows/build%20and%20run/badge.svg)
-![run](https://github.com/kkmann/sample-size-calculation-under-uncertainty/workflows/run/badge.svg)
 
 
 # A review of Bayesian perspectives on sample size derivation for confirmatory trials
