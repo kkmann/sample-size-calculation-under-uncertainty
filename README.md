@@ -26,10 +26,7 @@ installing any software on your local system.
 If the command `nbconvert` is available on the system, 
 the figures can also be created non-interactively by executing the command 
 ```
-jupyter nbconvert \
-    --to notebook \
-    --execute --ExecutePreprocessor.timeout=600 \
-    sample-size-calculation-under-uncertainty.ipynb
+jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=600 sample-size-calculation-under-uncertainty.ipynb
 ```
 
 We also provide a simple Shiny app that enables exploring the sample 

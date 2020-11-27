@@ -19,4 +19,4 @@ jobs:
     - name: execute workflow
       run: |
         docker exec repo-container \
-          jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=600 sample-size-calculation-under-uncertainty.ipynb
+            jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=600 sample-size-calculation-under-uncertainty.ipynb
